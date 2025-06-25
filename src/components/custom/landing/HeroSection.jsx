@@ -1,129 +1,122 @@
 'use client'
+
 import { useState, useEffect } from 'react';
 
 const HeroSection = () => {
-  const images = [
-    { src: '/community/canada.png', alt: 'Canada Community' },
-    { src: '/community/Cricket.png', alt: 'Cricket Community' },
-    { src: '/community/ArtExhibit.png', alt: 'Art Exhibit', mirrored: true },
-    { src: '/community/award.png', alt: 'Award Ceremony' }
-  ];
-
-  const [currentImageIndex, setCurrentImageIndex] = useState(0);
+  const [isMounted, setIsMounted] = useState(false);
 
   useEffect(() => {
-    const interval = setInterval(() => {
-      setCurrentImageIndex((prevIndex) => 
-        prevIndex === images.length - 1 ? 0 : prevIndex + 1
-      );
-    }, 5000); // Change image every 5 seconds
+    const timer = setTimeout(() => setIsMounted(true), 100); // Small delay to ensure styles apply
+    return () => clearTimeout(timer);
+  }, []);
 
-    return () => clearInterval(interval);
-  }, [images.length]);
+  const handleVolunteerClick = () => {
+    const volunteerForm = document.getElementById('volunteer-form');
+    const emailInput = document.getElementById('volunteer-email');
+    
+    if (volunteerForm) {
+      volunteerForm.scrollIntoView({ 
+        behavior: 'smooth', 
+        block: 'center' 
+      });
+      
+      // Focus the email input after scrolling
+      setTimeout(() => {
+        if (emailInput) {
+          emailInput.focus();
+        }
+      }, 800); // Delay to allow scroll animation to complete
+    }
+  };
 
   return (
-    <section className="relative h-screen bg-white overflow-hidden pt-16">
-      {/* Animated Background Images */}
+    <section className="relative h-[100vh] bg-white overflow-hidden pt-16">
+      {/* Static Background Image */}
       <div className="absolute inset-0">
-        {images.map((image, index) => (
-          <div
-            key={index}
-            className={`absolute inset-0 bg-cover bg-no-repeat transition-opacity duration-1000 ease-in-out ${
-              index === currentImageIndex ? 'opacity-100' : 'opacity-0'
-            }`}
-            style={{
-              backgroundImage: `url('${image.src}')`,
-              backgroundPosition: 'right 20%',
-              backgroundSize: 'cover',
-              transform: image.mirrored ? 'scaleX(-1)' : 'none'
-            }}
-          />
-        ))}
+        <div
+          className="absolute inset-0 bg-cover bg-no-repeat"
+          style={{
+            backgroundImage: `url('/community/ArtExhibit.png')`,
+            backgroundPosition: 'right 20% center 60%',
+            backgroundSize: 'cover',
+            transform: 'scaleX(-1)'
+          }}
+        />
         
         {/* Professional Overlay */}
-        <div className="absolute inset-0 bg-gradient-to-r from-white via-white/90 to-white/30"></div>
+        <div className="absolute inset-0 bg-gradient-to-r from-white via-white/10 to-white/10"></div>
         <div className="absolute inset-0 bg-gradient-to-t from-black/10 via-transparent to-transparent"></div>
       </div>
       
       {/* Content */}
       <div className="relative z-10 h-full flex items-center">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full">
+        <div className="w-full ml-10">
           <div className="grid lg:grid-cols-2 gap-8 items-center h-full">
             {/* Left Column - Text */}
-            <div className="space-y-6">
+            <div className="space-y-6 pl-4 sm:pl-6 lg:pl-8 pr-4 sm:pr-6 lg:pr-0">
               {/* Main Heading */}
               <div className="space-y-4">
-                <h2 className="text-4xl md:text-3xl lg:text-4xl font-black text-gray-900 leading-tight drop-shadow-sm">
-                  <span className="block">"THE GOLDEN AGE OF</span>
-                  <span className="block text-red-600">BRAMPTON</span>
-                  <span className="block text-red-600">BEGINS</span>
-                  <span className="block">RIGHT NOW."</span>
+                <h2 className={`text-4xl md:text-4xl lg:text-5xl font-black leading-tight drop-shadow-sm transition-all duration-1000 ease-out ${isMounted ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-6'}`}>
+                  <span className={`block text-gray-900 transition-all duration-1000 ease-out delay-100 ${isMounted ? 'opacity-100 translate-x-0' : 'opacity-0 -translate-x-4'}`}>THE GOLDEN AGE OF</span>
+                  <span className={`block text-red-600 transition-all duration-1000 ease-out delay-200 ${isMounted ? 'opacity-100 translate-x-0' : 'opacity-0 -translate-x-4'}`}>BRAMPTON</span>
+                  <span className={`block text-red-600 transition-all duration-1000 ease-out delay-300 ${isMounted ? 'opacity-100 translate-x-0' : 'opacity-0 -translate-x-4'}`}>BEGINS</span>
+                  <span className={`block text-gray-900 transition-all duration-1000 ease-out delay-400 ${isMounted ? 'opacity-100 translate-x-0' : 'opacity-0 -translate-x-4'}`}>RIGHT NOW.</span>
                 </h2>
                 
-                <div className="text-lg md:text-xl font-bold text-gray-700 max-w-2xl drop-shadow-sm">
+                <div className={`text-lg md:text-xl font-bold text-gray-700 max-w-2xl drop-shadow-sm transition-all duration-1000 ease-out delay-500 ${isMounted ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4'}`}>
                   ROD POWER, City Councillor for Brampton
                 </div>
               </div>
 
-              {/* Action Buttons */}
-              {/* <div className="flex flex-col sm:flex-row gap-4">
-                <button className="bg-red-600 hover:bg-red-700 text-white font-bold py-4 px-8 rounded text-lg transition-all duration-300 transform hover:scale-105 shadow-lg hover:shadow-xl min-w-[160px]">
-                  CONTRIBUTE
-                </button>
-                <button className="bg-blue-700 hover:bg-blue-800 text-white font-bold py-4 px-8 rounded text-lg transition-all duration-300 transform hover:scale-105 shadow-lg hover:shadow-xl min-w-[160px]">
-                  VOLUNTEER
-                </button>
-              </div> */}
-
               {/* Quote */}
               <div className="max-w-2xl">
-                <blockquote className="text-base md:text-lg text-gray-700 italic border-l-4 border-red-600 pl-6 bg-white/20 backdrop-blur-sm py-4 shadow-sm">
+                <p className={`text-base md:text-lg text-white bg-red-600 backdrop-blur-sm italic border-l-4 border-blue-600 pl-6 py-4 shadow-lg transition-all duration-1000 ease-out delay-700 ${isMounted ? 'opacity-100 translate-y-0 scale-100' : 'opacity-0 translate-y-4 scale-95'}`}>
                   "I have one life and one chance to make it count for something… My faith demands that I do whatever I can, wherever I am, whenever I can, for as long as I can with whatever I have to try to make a difference."
-                </blockquote>
+                </p>
               </div>
             </div>
 
-            {/* Right Column - Image space (background image handles this) */}
-            <div className="hidden lg:block">
-              {/* This space is handled by the background images */}
+            {/* Right Column - Semi-Circle Action Buttons */}
+            <div className="relative h-full flex flex-col justify-center">
+              {/* CONTRIBUTE Button */}
+              <div className="absolute right-0 top-1/2 transform -translate-y-16 z-30">
+                <button className="group bg-red-600 hover:bg-red-700 text-white font-bold py-6 px-12 text-lg transition-all duration-500 shadow-lg hover:shadow-xl rounded-l-full border-r-0 translate-x-8 hover:translate-x-0 flex items-center min-w-[200px] justify-start">
+                  <span className="mr-4 whitespace-nowrap">CONTRIBUTE</span>
+                  <svg className="w-6 h-6 transition-transform duration-300 group-hover:translate-x-1 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
+                  </svg>
+                </button>
+              </div>
+
+              {/* VOLUNTEER Button */}
+              <div className="absolute right-0 top-1/2 transform translate-y-4 z-30">
+                <button className="group bg-blue-700 hover:bg-blue-800 text-white font-bold py-6 px-12 text-lg transition-all duration-500 shadow-lg hover:shadow-xl rounded-l-full border-r-0 translate-x-8 hover:translate-x-0 flex items-center min-w-[200px] justify-start" onClick={handleVolunteerClick}>
+                  <span className="mr-4 whitespace-nowrap">VOLUNTEER</span>
+                  <svg className="w-6 h-6 transition-transform duration-300 group-hover:translate-x-1 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
+                  </svg>
+                </button>
+              </div>
+
+              {/* Mobile Action Buttons (fallback for small screens) */}
+              <div className="lg:hidden flex flex-col gap-4 mt-8">
+                <button className="group bg-red-600 hover:bg-red-700 text-white font-bold py-4 px-8 text-lg transition-all duration-300 transform hover:scale-105 shadow-lg hover:shadow-xl flex items-center justify-center">
+                  <span className="mr-3">CONTRIBUTE</span>
+                  <svg className="w-5 h-5 transition-transform duration-300 group-hover:translate-x-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
+                  </svg>
+                </button>
+                <button className="group bg-blue-700 hover:bg-blue-800 text-white font-bold py-4 px-8 text-lg transition-all duration-300 transform hover:scale-105 shadow-lg hover:shadow-xl flex items-center justify-center">
+                  <span className="mr-3">VOLUNTEER</span>
+                  <svg className="w-5 h-5 transition-transform duration-300 group-hover:translate-x-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
+                  </svg>
+                </button>
+              </div>
             </div>
           </div>
         </div>
       </div>
-
-      {/* Professional Slide Indicators */}
-      {/* <div className="absolute bottom-8 left-1/2 transform -translate-x-1/2 flex space-x-3 z-20">
-        {images.map((_, index) => (
-          <button
-            key={index}
-            onClick={() => setCurrentImageIndex(index)}
-            className={`w-3 h-3 rounded-full transition-all duration-300 ${
-              index === currentImageIndex 
-                ? 'bg-red-600 shadow-lg scale-110' 
-                : 'bg-white/60 hover:bg-white/80'
-            }`}
-            aria-label={`View slide ${index + 1}`}
-          />
-        ))}
-      </div> */}
-
-      {/* Progress Bar */}
-      <div className="absolute bottom-0 left-0 w-full h-1 bg-white/20 z-20">
-        <div 
-          className="h-full bg-red-600 transition-all duration-[5000ms] ease-linear"
-          style={{ 
-            width: `${((currentImageIndex + 1) / images.length) * 100}%`,
-            animation: 'slideProgress 5s linear infinite'
-          }}
-        />
-      </div>
-
-      <style jsx>{`
-        @keyframes slideProgress {
-          0% { width: 0%; }
-          100% { width: 100%; }
-        }
-      `}</style>
     </section>
   );
 };
