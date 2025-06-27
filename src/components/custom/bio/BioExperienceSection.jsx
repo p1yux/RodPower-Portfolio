@@ -126,13 +126,13 @@ const BioExperienceSection = () => {
                     </p>
                     
                     {/* Featured Card Button */}
-                    {area.featured && (
+                    {/* {area.featured && (
                       <div className="mt-6">
                         <button className="border-2 border-white text-white px-6 py-2 text-sm font-medium hover:bg-white hover:text-red-600 transition-all duration-300 transform hover:scale-105">
                           Learn More
                         </button>
                       </div>
-                    )}
+                    )} */}
                   </div>
                 </div>
               </div>
