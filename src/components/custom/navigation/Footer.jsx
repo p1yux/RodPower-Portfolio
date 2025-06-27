@@ -76,11 +76,11 @@ const Footer = () => {
                   Community Memories
                 </a>
               </li>
-              <li>
+              {/* <li>
                 <a href="/contact" className="text-gray-400 hover:text-white transition-colors duration-200">
                   Contact
                 </a>
-              </li>
+              </li> */}
             </ul>
           </div>
 
