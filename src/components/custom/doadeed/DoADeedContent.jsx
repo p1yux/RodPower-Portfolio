@@ -87,7 +87,7 @@ const DoADeedContent = () => {
               <div
                 className="absolute inset-0 bg-cover bg-center hover:scale-105 transition-transform duration-700"
                 style={{
-                  backgroundImage: `url('/community/Horse.png')`,
+                  backgroundImage: `url('/community/ArtExhibit.png')`,
                   backgroundPosition: 'center'
                 }}
               />
@@ -130,7 +130,7 @@ const DoADeedContent = () => {
         <div className={`mt-10 text-center transition-all duration-1000 ease-out delay-1400 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}>
           <blockquote className="text-lg md:text-xl font-bold text-gray-900 max-w-4xl mx-auto leading-tight">
             "To hear someone say 'for someone to have their own personal toothbrush' is a small 
-            thing for some but it gives someone <span className="text-white">the ability to smile</span>."
+            thing for some but it gives someone <span className="text-white">the ability to smile</span>"
           </blockquote>
           <cite className="block text-white text-base mt-4">- Rod Power</cite>
         </div>

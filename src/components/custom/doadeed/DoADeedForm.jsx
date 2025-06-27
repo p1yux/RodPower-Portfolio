@@ -213,7 +213,7 @@ const DoADeedForm = () => {
               className="absolute inset-0 bg-cover bg-center hover:scale-105 transition-transform duration-700"
               style={{
                 backgroundImage: `url('/community/award.png')`,
-                backgroundPosition: 'center'
+                backgroundPosition: 'center 40%'
               }}
             />
             <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent"></div>

@@ -4,6 +4,7 @@ import PlatformSection from '@/components/custom/landing/PlatformSection';
 import OrgSection from '@/components/custom/landing/OrgSection';
 import SupportSection from '@/components/custom/landing/SupportSection';
 import VolunteerForm from '@/components/custom/landing/VolunteerForm';
+import MoreInfo from '@/components/custom/landing/MoreInfo';
 
 export default function Home() {
   return (
@@ -15,6 +16,7 @@ export default function Home() {
       </div>
       <SupportSection />
       <PlatformSection />
+      <MoreInfo />
       <OrgSection />
     </main>
   );

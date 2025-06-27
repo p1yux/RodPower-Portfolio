@@ -156,14 +156,14 @@ const SupportSection = () => {
             <p className="text-red-400 font-medium mt-4">- Rod Power, City Councillor</p>
           </div>
           
-          <div className={`flex flex-col sm:flex-row gap-4 justify-center transition-all duration-1000 ease-out delay-1300 ${isInView ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4'}`}>
+          {/* <div className={`flex flex-col sm:flex-row gap-4 justify-center transition-all duration-1000 ease-out delay-1300 ${isInView ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4'}`}>
             <button className="bg-red-600 hover:bg-red-700 text-white px-8 py-3 font-medium transition-all duration-300 transform hover:scale-105 shadow-lg hover:shadow-xl">
               Get Support
             </button>
             <button className="border-2 border-white text-white px-8 py-3 font-medium hover:bg-white hover:text-slate-900 transition-all duration-300 transform hover:scale-105">
               Contact Rod
             </button>
-          </div>
+          </div> */}
         </div>
       </div>
     </section>

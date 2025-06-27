@@ -16,29 +16,23 @@ const BioHeroSection = () => {
         <div
           className="absolute inset-0 bg-cover bg-center"
           style={{
-            backgroundImage: `url('/community/brampton.png')`,
+            backgroundImage: `url('/community/accessibility.png')`,
             backgroundPosition: 'center 65%',
             backgroundSize: 'cover'
           }}
         />
         
         {/* Professional Overlay */}
-        <div className="absolute inset-0 bg-gradient-to-r from-blue-900/90 via-blue-900/30 to-blue-900/10"></div>
+        <div className="absolute inset-0 bg-gradient-to-r from-gray-900/90 via-gray-900/30 to-gray-900/10"></div>
         <div className="absolute inset-0 bg-gradient-to-t from-black/30 via-transparent to-transparent"></div>
       </div>
       
       {/* Content */}
-      <div className="relative z-10 h-full flex items-center">
+      <div className="relative z-10 h-full flex items-end pb-16">
         <div className="w-full ml-4 sm:ml-6 lg:ml-10">
           <div className="max-w-4xl">
             {/* Main Content */}
             <div className="space-y-8 pl-4 sm:pl-6 lg:pl-8">
-              {/* Badge */}
-              <div className={`inline-block transition-all duration-1000 ease-out ${isMounted ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4'}`}>
-                <span className="bg-red-600 text-white px-6 py-2 text-sm font-bold uppercase tracking-wide">
-                  Biography
-                </span>
-              </div>
 
               {/* Main Heading */}
               <div className="space-y-6">
@@ -48,7 +42,8 @@ const BioHeroSection = () => {
                   <span className="text-red-400">BRAMPTONIAN</span>
                 </h1>
                 
-                <div className={`text-xl md:text-2xl font-bold text-white/90 max-w-3xl drop-shadow-sm transition-all duration-1000 ease-out delay-500 ${isMounted ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4'}`}>
+                <div className="h-[1px] w-1/2 bg-white"></div>
+                <div className={`text-xl md:text-2xl text-white/90 max-w-3xl drop-shadow-sm transition-all duration-1000 ease-out delay-500 ${isMounted ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4'}`}>
                   Rod Power has called Brampton home for more than 35 years, building a life, 
                   career, and family in the community he loves.
                 </div>

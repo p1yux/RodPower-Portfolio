@@ -16,7 +16,7 @@ const DoADeedHero = () => {
 
   // Calculate transform values based on scroll
   const scale = 1 + scrollY * 0.002; // Scale up as we scroll
-  const opacity = Math.max(0, 1 - scrollY * 0.003); // Fade out as we scroll
+  const opacity = Math.max(0, 1 - scrollY * 0.001); // Fade out as we scroll
 
   return (
     <section ref={sectionRef} className="fixed top-0 left-0 w-full h-screen overflow-hidden z-10">
