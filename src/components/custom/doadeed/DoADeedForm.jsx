@@ -1,5 +1,6 @@
 'use client'
 import { useState, useEffect, useRef } from 'react';
+import { doADeedService } from '../../../lib/firebaseServices';
 
 const DoADeedForm = () => {
   const [isVisible, setIsVisible] = useState(false);
@@ -42,24 +43,51 @@ const DoADeedForm = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     setIsSubmitting(true);
-    
-    // Simulate form submission
-    setTimeout(() => {
+    setSubmitMessage('');
+
+    // Validate required fields
+    if (!formData.firstName.trim() || !formData.lastName.trim() || 
+        !formData.email.trim() || !formData.background.trim()) {
+      setSubmitMessage('Please fill in all required fields.');
       setIsSubmitting(false);
-      setSubmitMessage('Thanks for submitting! We\'ll be in touch soon.');
-      setFormData({
-        firstName: '',
-        lastName: '',
-        email: '',
-        phone: '',
-        background: ''
-      });
+      return;
+    }
+
+    try {
+      // Create the deed data object
+      const deedData = {
+        firstName: formData.firstName.trim(),
+        lastName: formData.lastName.trim(),
+        email: formData.email.trim(),
+        phone: formData.phone.trim(),
+        description: formData.background.trim()
+      };
+
+      const result = await doADeedService.create(deedData);
       
-      // Clear success message after 5 seconds
+      if (result.success) {
+        setSubmitMessage('Thanks for submitting! We\'ll be in touch soon.');
+        setFormData({
+          firstName: '',
+          lastName: '',
+          email: '',
+          phone: '',
+          background: ''
+        });
+      } else {
+        setSubmitMessage('Something went wrong. Please try again.');
+      }
+    } catch (error) {
+      console.error('Error submitting Do A Deed form:', error);
+      setSubmitMessage('Something went wrong. Please try again.');
+    } finally {
+      setIsSubmitting(false);
+      
+      // Clear message after 5 seconds
       setTimeout(() => {
         setSubmitMessage('');
       }, 5000);
-    }, 1000);
+    }
   };
 
   return (
@@ -81,9 +109,13 @@ const DoADeedForm = () => {
         <div className={`transition-all duration-1000 ease-out delay-200 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}>
           <div className="bg-gray-50 p-8 md:p-12 rounded-lg shadow-lg">
             
-            {/* Success Message */}
+            {/* Success/Error Message */}
             {submitMessage && (
-              <div className="mb-8 p-4 bg-green-100 border border-green-400 text-green-700 rounded-lg">
+              <div className={`mb-8 p-4 rounded-lg ${
+                submitMessage.includes('Thanks') 
+                  ? 'bg-green-100 border border-green-400 text-green-700' 
+                  : 'bg-red-100 border border-red-400 text-red-700'
+              }`}>
                 {submitMessage}
               </div>
             )}
